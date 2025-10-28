@@ -8,16 +8,60 @@ class CardScroller extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // width: 400,
-      height: 150,
+      height: 130,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 6,
         itemBuilder: (context, index) {
         return Card(
-          child: Container(
-            width: 300,
-            height: 70,
-            color: AppColors.primaryColor,
+          child: Row(
+            children: [
+              Container(
+                color: AppColors.secondaryColor,
+                height: 130,
+                width: 10,
+              ),
+              Container(
+                // width: 280,
+                height: 130,
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.grayColor,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
+                
+                ),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Tue 28 Oct',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                        Text('Ethiopian Premier League'),
+                        Column(
+                          children: [
+                            Text('Saint George'),
+                            Text('vs'),
+                            Text('Fasil Kenema'),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Container(width: 3,color: AppColors.primaryColor,margin: EdgeInsets.symmetric(horizontal: 10),),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kick Off'),
+                        Text('19:30 PM'),
+                        Text('Hawassa Stadium'),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
         );
       },
