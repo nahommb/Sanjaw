@@ -26,7 +26,16 @@ class _MainScreenState extends State<MainScreen> {
         width: 100,
         height: 40,
         color: AppColors.primaryColor,
-      ),centerTitle: true,),
+      ),centerTitle: true,
+      actions: [
+        IconButton(
+          icon: Icon(Icons.people,size: 30,),
+          onPressed: () {
+            print('clicked');
+          },
+        ),
+      ],
+      ),
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
