@@ -7,12 +7,12 @@ class AppTheme {
     primaryColor: Colors.amber,
     scaffoldBackgroundColor: Colors.white,
     colorScheme: ColorScheme.light(
-      primary:  Color.fromARGB(255, 187, 38, 38),
-      secondary: Colors.amber,
+      primary:  Color(0xFFc9232f),
+      secondary: Color(0xFFf5e108),
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.amber,
-      foregroundColor: Color.fromARGB(255, 187, 38, 38),
+      backgroundColor: Color(0xFFf5e108),
+      foregroundColor: Color(0xFFc9232f),
       elevation: 0,
     ),
     textTheme: const TextTheme(
