@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sanjaw/core/config/app_colors.dart';
 import 'package:sanjaw/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sanjaw/features/players/presentation/screens/players_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -32,6 +33,7 @@ class _MainScreenState extends State<MainScreen> {
           icon: Icon(Icons.people,size: 30,),
           onPressed: () {
             print('clicked');
+            Navigator.pushNamed(context, PlayersScreen.routeName);
           },
         ),
       ],
