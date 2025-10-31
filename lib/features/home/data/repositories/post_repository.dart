@@ -9,10 +9,11 @@ class PostRepository {
   final String baseUrl = BaseUrls.apiBaseUrl; // your API endpoint
 
   Future<List<PostModel>> fetchPosts({int page = 1}) async {
-    final response = await http.get(Uri.parse('$baseUrl/posts?page=$page'));
-
+    final response = await http.get(Uri.parse('$baseUrl/posts/allposts?page=$page'));
+    print(response.body);
     if (response.statusCode == 200) {
       final List data = jsonDecode(response.body);
+      print(data.length);
       return data.map((json) => PostModel.fromJson(json)).toList();
     } else {
       throw Exception("Failed to fetch posts");
