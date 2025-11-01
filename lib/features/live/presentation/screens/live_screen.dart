@@ -34,8 +34,8 @@ class LiveScreen extends StatelessWidget {
               height: screenHeight * 0.3,
               child: LiveYouTubeVideo(),
             ),
-            Spacer(),
-           LiveCommenetator(),
+            // Spacer(),
+           Expanded(child: LiveCommenetator()),
           ],
         ),
 
