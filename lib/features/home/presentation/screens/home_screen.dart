@@ -64,7 +64,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: CircularProgressIndicator(),
         ),
         error: (err, _) => Center(
-          child: Text('Error: $err'),
+          child: Text('Somthing went wrong or please trun on your internet'),
         ),
       ),
     );

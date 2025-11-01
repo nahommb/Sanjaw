@@ -5,6 +5,7 @@ import 'package:sanjaw/features/main/presentation/main_screen.dart';
 import 'package:sanjaw/features/players/presentation/screens/players_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized(); 
   runApp(const ProviderScope(child: MyApp()));
 }
 

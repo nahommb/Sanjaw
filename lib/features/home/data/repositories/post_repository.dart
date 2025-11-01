@@ -10,7 +10,7 @@ class PostRepository {
 
   Future<List<PostModel>> fetchPosts({int page = 1}) async {
     final response = await http.get(Uri.parse('$baseUrl/posts/allposts?page=$page'));
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200) {
       final List data = jsonDecode(response.body);
       print(data.length);

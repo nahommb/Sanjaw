@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sanjaw/core/helper/time_ago.dart';
 import 'package:sanjaw/features/home/data/models/post_model.dart';
 
+
 class PostContainer extends StatelessWidget {
   final List<PostModel> posts;
 
@@ -10,7 +11,7 @@ class PostContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(6),
       child: Column(
         children: posts.map((post) {
           return Card(
@@ -28,6 +29,7 @@ class PostContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                 
                   Image.network(
                     post.imageUrl!,
                     width: double.infinity,
