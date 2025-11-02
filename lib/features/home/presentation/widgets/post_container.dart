@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sanjaw/core/helper/time_ago.dart';
 import 'package:sanjaw/features/home/data/models/post_model.dart';
-
+import 'package:sanjaw/features/home/presentation/provider/match_day_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostContainer extends StatelessWidget {
   final List<PostModel> posts;
@@ -10,6 +11,9 @@ class PostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    // final matches = ref.watch(matchDayListProvider);
+
     return Container(
       padding: const EdgeInsets.all(6),
       child: Column(

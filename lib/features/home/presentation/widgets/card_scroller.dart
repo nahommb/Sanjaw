@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sanjaw/core/config/app_colors.dart';
+import 'package:sanjaw/features/home/data/models/match_day_model.dart';
 
 class CardScroller extends StatelessWidget {
-  const CardScroller({super.key});
+
+  final List<MatchDayModel> matchDays;
+  const CardScroller({super.key, required this.matchDays});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +14,7 @@ class CardScroller extends StatelessWidget {
       height: 130,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 6,
+        itemCount: matchDays.length,
         itemBuilder: (context, index) {
         return Card(
           child: Row(
@@ -39,7 +42,7 @@ class CardScroller extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Tue 28 Oct',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                        Text('Ethiopian Premier League'),
+                        Text(''),
                         Column(
                           children: [
                             Text('Saint George'),
