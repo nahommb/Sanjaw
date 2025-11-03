@@ -24,7 +24,7 @@ class MatchDayNotifier extends StateNotifier<AsyncValue<List<MatchDayModel>>> {
   Future<void> fetchMatchDays() async {
     try {
       final matchDays = await repository.fatchMatch();
-      state = AsyncValue.data(matchDays);
+      state = AsyncValue.data([...matchDays]);
     } catch (e) {
       debugPrint('Error fetching match days: $e');
     }

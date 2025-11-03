@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sanjaw/core/config/app_colors.dart';
 import 'package:sanjaw/features/home/data/models/match_day_model.dart';
+import 'package:intl/intl.dart';
 
 class CardScroller extends StatelessWidget {
 
@@ -16,6 +17,12 @@ class CardScroller extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: matchDays.length,
         itemBuilder: (context, index) {
+        
+        // final dateTime = DateTime.parse(matchDays[index].matchDate!);
+        final formattedDate = DateFormat('dd MMM').format(matchDays[index].matchDate!);
+        final timeFormatted = DateFormat('hh:mm a').format(matchDays[index].matchDate!);
+        Text(formattedDate);
+
         return Card(
           child: Row(
             children: [
@@ -27,7 +34,7 @@ class CardScroller extends StatelessWidget {
               Container(
                 // width: 280,
                 height: 130,
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: AppColors.grayColor,
                   borderRadius: BorderRadius.only(
@@ -41,13 +48,13 @@ class CardScroller extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Tue 28 Oct',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                        Text(''),
+                        Text(formattedDate,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                        Text('${matchDays[index].eventType}'),
                         Column(
                           children: [
-                            Text('Saint George'),
+                            Text('${matchDays[index].homeTeam}'),
                             Text('vs'),
-                            Text('Fasil Kenema'),
+                            Text('${matchDays[index].awayTeam}'),
                           ],
                         ),
                       ],
@@ -57,8 +64,8 @@ class CardScroller extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Kick Off'),
-                        Text('19:30 PM'),
-                        Text('Hawassa Stadium'),
+                        Text(timeFormatted),
+                        Text('${matchDays[index].venue}!'),
                       ],
                     )
                   ],
