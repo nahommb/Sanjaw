@@ -13,7 +13,7 @@ class PostRepository {
     // print(response.body);
     if (response.statusCode == 200) {
       final List data = jsonDecode(response.body);
-      print(data.length);
+      // print(data.length);
       return data.map((json) => PostModel.fromJson(json)).toList();
     } else {
       throw Exception("Failed to fetch posts");

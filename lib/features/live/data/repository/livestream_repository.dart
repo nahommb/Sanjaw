@@ -7,11 +7,14 @@ class LivestreamRepository {
 
   final baseUrl = BaseUrls.apiBaseUrl;
 
-  Future<List<LiveModel>> fetchMatchEvents(String matchId) async {
-    final response = await http.get(Uri.parse('$baseUrl/live/match/$matchId/events'));
+  Future<List<LiveModel>> fetchMatch() async {
+    
+   final response = await http.get(Uri.parse('$baseUrl/livestream/getlivematch'));
+
     if (response.statusCode == 200) {
       final data = response.body;
       final List jsonData = jsonDecode(data);
+      print(data);
       return jsonData.map((json) => LiveModel.fromJson(json)).toList();
     } else {
       throw Exception("Failed to fetch match events");

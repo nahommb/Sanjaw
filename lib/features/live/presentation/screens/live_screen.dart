@@ -24,16 +24,16 @@ class LiveScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: AppColors.primaryColor),
             ),
             SizedBox(height: 20),
-            Container(
-              // width: MediaQuery.of(context).size.width * 0.9,
-              // padding: EdgeInsets.all(2.0),
-              // decoration: BoxDecoration(
-              //   border: Border.all(color: AppColors.primaryColor, width: 2),
-              //   borderRadius: BorderRadius.circular(2),
-              // ),
-              height: screenHeight * 0.3,
-              child: LiveYouTubeVideo(),
-            ),
+            // Container(
+            //   // width: MediaQuery.of(context).size.width * 0.9,
+            //   // padding: EdgeInsets.all(2.0),
+            //   // decoration: BoxDecoration(
+            //   //   border: Border.all(color: AppColors.primaryColor, width: 2),
+            //   //   borderRadius: BorderRadius.circular(2),
+            //   // ),
+            //   height: screenHeight * 0.3,
+            //   child: LiveYouTubeVideo(),
+            // ),
             // Spacer(),
            Expanded(child: LiveCommenetator()),
           ],

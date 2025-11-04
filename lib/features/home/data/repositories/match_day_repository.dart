@@ -10,7 +10,7 @@ class MatchDayRepository {
   final response = await http.get(Uri.parse('$baseUrl/posts/matchdays'));
   if(response.statusCode == 200){
    final List data = jsonDecode(response.body);
-   print(data);
+  //  print(data);
    return data.map((json) => MatchDayModel.fromJson(json)).toList();
   }
   else{

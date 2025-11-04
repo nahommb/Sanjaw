@@ -1,28 +1,32 @@
 
 class LiveModel{
-  final String matchId ;
-  final String eventType;
-  final String teamName;
+  final int id ;
+  final String homeTeam;
+  final String awayTeam;
+  final String? liveId;
   
 LiveModel({
-    required this.matchId,
-    required this.eventType,
-    required this.teamName,
+    required this.id,
+    required this.homeTeam,
+    required this.awayTeam,
+    this.liveId,
   });
 
 factory LiveModel.fromJson(Map<String, dynamic> json) {
     return LiveModel(
-      matchId: json['match_id'] as String,
-      eventType: json['event_type'] as String,
-      teamName: json['team_name'] as String,
+      id: json['id'] as int,
+      homeTeam: json['home_team'] as String,
+      awayTeam: json['away_team'] as String,
+      liveId:json['live_id'] as String?
     );
   }
 
-  Map<String, dynamic> toJson() {
+Map<String, dynamic> toJson() {
     return {
-      'matchId': matchId,
-      'eventType': eventType,
-      'teamName': teamName,
+      'id': id,
+      'homeTeam': homeTeam,
+      'awayTeam': awayTeam,
+      'liveId':liveId,
     };
   }
 }
