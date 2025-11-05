@@ -1,4 +1,4 @@
-package com.example.sanjaw
+package com.nahom.sanjaw
 
 import io.flutter.embedding.android.FlutterActivity
 
