@@ -17,32 +17,32 @@ class _MainScreenState extends State<MainScreen> {
 
 
 
-final FirebaseMessaging _messaging = FirebaseMessaging.instance;
-  String? _token;
+// final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+//   String? _token;
 
   @override
   void initState() {
     super.initState();
-    _initFCM();
+    // _initFCM();
   }
 
-  Future<void> _initFCM() async {
-    // 1️⃣ Request notification permission (important for iOS)
-    await _messaging.requestPermission();
+  // Future<void> _initFCM() async {
+  //   // 1️⃣ Request notification permission (important for iOS)
+  //   await _messaging.requestPermission();
 
-    // 2️⃣ Get FCM token
-    String? token = await _messaging.getToken();
-    print("✅ FCM Token: $token");
+  //   // 2️⃣ Get FCM token
+  //   String? token = await _messaging.getToken();
+  //   print("✅ FCM Token: $token");
 
-    setState(() {
-      _token = token;
-    });
+  //   setState(() {
+  //     _token = token;
+  //   });
 
-    // 3️⃣ Listen for messages when app is in foreground
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("📩 Message received: ${message.notification?.title}");
-    });
-  }
+  //   // 3️⃣ Listen for messages when app is in foreground
+  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //     print("📩 Message received: ${message.notification?.title}");
+  //   });
+  // }
 
 
 

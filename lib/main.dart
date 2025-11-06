@@ -7,17 +7,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-// 1️⃣ Create a FlutterLocalNotificationsPlugin instance
+// 🔔 Local notifications instance
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-// 2️⃣ Background message handler
+// 🧠 Background message handler
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print("Background message: ${message.messageId}");
+  print("📩 Background message received: ${message.notification?.title}");
 }
 
-// 3️⃣ Initialize local notifications
+// 🧩 Initialize local notifications
 Future<void> _initLocalNotifications() async {
   const AndroidInitializationSettings androidSettings =
       AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -28,7 +28,7 @@ Future<void> _initLocalNotifications() async {
   await flutterLocalNotificationsPlugin.initialize(initSettings);
 }
 
-// 4️⃣ Show notification
+// 📢 Show local notification
 Future<void> _showNotification(RemoteMessage message) async {
   final notification = message.notification;
   final android = message.notification?.android;
@@ -36,43 +36,52 @@ Future<void> _showNotification(RemoteMessage message) async {
   if (notification != null && android != null) {
     await flutterLocalNotificationsPlugin.show(
       notification.hashCode,
-      notification.title,
-      notification.body,
-      NotificationDetails(
+      notification.title ?? 'Notification',
+      notification.body ?? '',
+      const NotificationDetails(
         android: AndroidNotificationDetails(
           'default_channel', // channel id
           'Default Channel', // channel name
           importance: Importance.max,
           priority: Priority.high,
+          playSound: true,
         ),
       ),
     );
   }
 }
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-
-  // Initialize local notifications
   await _initLocalNotifications();
 
-  // Register background handler
+  // ✅ Handle background messages
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  // Request permissions (iOS)
   final messaging = FirebaseMessaging.instance;
+
+  // 🔐 Request permission (especially needed for iOS)
   await messaging.requestPermission();
 
-  // Get FCM token
-  final token = await messaging.getToken();
-  print("🔥 FCM Token: $token");
+  // 🎯 Subscribe to topic (all users get this)
+  await messaging.subscribeToTopic('live_updates');
+  print("✅ Subscribed to topic: live_updates");
 
-  // Foreground messages
+  // 🔥 Print FCM token (for debugging)
+  final token = await messaging.getToken();
+  print("📱 FCM Token: $token");
+
+  // ⚡ Listen for foreground messages
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print("Foreground message: ${message.notification?.title}");
-    _showNotification(message); // Show notification in status bar
+    print("📬 Foreground message: ${message.notification?.title}");
+    _showNotification(message);
+  });
+
+  // 🕊️ When user taps notification (app opened from background)
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    print("🚀 Notification tapped: ${message.notification?.title}");
   });
 
   runApp(const ProviderScope(child: MyApp()));
@@ -88,9 +97,10 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       routes: {
-        PlayersScreen.routeName: (context) => PlayersScreen(),
+        PlayersScreen.routeName: (context) => const PlayersScreen(),
       },
       home: const MainScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
