@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sanjaw/features/home/presentation/widgets/post_video_player.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:sanjaw/core/helper/time_ago.dart';
 import 'package:sanjaw/features/home/data/models/post_model.dart';
@@ -66,27 +67,8 @@ class _PostContainerState extends State<PostContainer> {
                                   url.endsWith('.mkv');
 
                               if (isVideo) {
-                                return Stack(
-                                  children: [
-                                    Container(
-                                      color: Colors.black12,
-                                      child: const Center(
-                                        child: Icon(Icons.videocam,
-                                            size: 80, color: Colors.grey),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      right: 10,
-                                      bottom: 10,
-                                      child: Container(
-                                        padding: const EdgeInsets.all(4),
-                                        color: Colors.black45,
-                                        child: const Icon(Icons.play_arrow,
-                                            color: Colors.white, size: 30),
-                                      ),
-                                    )
-                                  ],
-                                );
+                                return VideoPost(url: post.mediaUrls[pageIndex]);
+                                
                               } else {
                                 return Image.network(
                                   url,
