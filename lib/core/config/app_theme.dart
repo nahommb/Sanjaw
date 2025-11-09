@@ -6,6 +6,7 @@ class AppTheme {
     brightness: Brightness.light,
     primaryColor: Colors.amber,
     scaffoldBackgroundColor: Colors.white,
+    fontFamily: 'Oswald-Regular',
     colorScheme: ColorScheme.light(
       primary:  Color(0xFFc9232f),
       secondary: Color(0xFFf5e108),
@@ -17,7 +18,7 @@ class AppTheme {
     ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
-      bodyMedium: TextStyle(fontSize: 14, color: Colors.black54),
+      bodyMedium: TextStyle(fontSize: 14, color:Colors.black),
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
@@ -29,7 +30,8 @@ class AppTheme {
    static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Colors.amber,
-        scaffoldBackgroundColor: const Color(0xFF121212),
+    scaffoldBackgroundColor: const Color(0xFF121212),
+    fontFamily: 'Oswald-Regular',
     colorScheme: const ColorScheme.dark(
       primary: Colors.teal,
       secondary: Colors.orange,

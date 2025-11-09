@@ -27,8 +27,14 @@ class PostNotifier extends StateNotifier<AsyncValue<List<PostModel>>> {
         _hasMore = false;
       }
       final current = state.value ?? [];
+      final updatedPosts = [...current, ...posts];
       state = AsyncValue.data([...current, ...posts]);
       _page++;
+     
+       if (updatedPosts.isNotEmpty) {
+        print("Media URLs for first post: ${updatedPosts.first.mediaUrls}");
+      }
+
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }

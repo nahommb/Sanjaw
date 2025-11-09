@@ -1,23 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:sanjaw/core/helper/time_ago.dart';
 import 'package:sanjaw/features/home/data/models/post_model.dart';
-import 'package:sanjaw/features/home/presentation/provider/match_day_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostContainer extends StatelessWidget {
+class PostContainer extends StatefulWidget {
   final List<PostModel> posts;
 
   const PostContainer({super.key, required this.posts});
 
   @override
-  Widget build(BuildContext context) {
-    
-    // final matches = ref.watch(matchDayListProvider);
+  State<PostContainer> createState() => _PostContainerState();
+}
 
+class _PostContainerState extends State<PostContainer> {
+  // Keep track of page controllers for each post
+  final Map<int, PageController> _controllers = {};
+
+  @override
+  void dispose() {
+    for (var controller in _controllers.values) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(6),
       child: Column(
-        children: posts.map((post) {
+        children: widget.posts.map((post) {
+          final index = widget.posts.indexOf(post);
+          final controller = _controllers[index] ??= PageController();
+
           return Card(
             margin: const EdgeInsets.only(bottom: 12),
             shape: RoundedRectangleBorder(
@@ -25,7 +40,6 @@ class PostContainer extends StatelessWidget {
             ),
             child: Container(
               width: double.infinity,
-              
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -33,34 +47,118 @@ class PostContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 
-                  Image.network(
-                    post.imageUrl!,
-                    width: double.infinity,
-                    height: 400,
-                    fit: BoxFit.fill,
-                  ),
+                  // 🖼️ MEDIA SECTION
+                  if (post.mediaUrls.isNotEmpty)
+                    Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        SizedBox(
+                          height: 400,
+                          child: PageView.builder(
+                            controller: controller,
+                            itemCount: post.mediaUrls.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, pageIndex) {
+                              final url = post.mediaUrls[pageIndex];
+                              final isVideo = url.endsWith('.mp4') ||
+                                  url.endsWith('.mov') ||
+                                  url.endsWith('.avi') ||
+                                  url.endsWith('.mkv');
+
+                              if (isVideo) {
+                                return Stack(
+                                  children: [
+                                    Container(
+                                      color: Colors.black12,
+                                      child: const Center(
+                                        child: Icon(Icons.videocam,
+                                            size: 80, color: Colors.grey),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      right: 10,
+                                      bottom: 10,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(4),
+                                        color: Colors.black45,
+                                        child: const Icon(Icons.play_arrow,
+                                            color: Colors.white, size: 30),
+                                      ),
+                                    )
+                                  ],
+                                );
+                              } else {
+                                return Image.network(
+                                  url,
+                                  width: double.infinity,
+                                  height: 400,
+                                  fit: BoxFit.cover,
+                                  errorBuilder:
+                                      (context, error, stackTrace) => const Center(
+                                    child: Icon(Icons.broken_image,
+                                        size: 60, color: Colors.grey),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                        // 🔵 Dots Indicator
+                        Positioned(
+                          bottom: 10,
+                          child: SmoothPageIndicator(
+                            controller: controller,
+                            count: post.mediaUrls.length,
+                            effect: const WormEffect(
+                              dotHeight: 8,
+                              dotWidth: 8,
+                              spacing: 6,
+                              activeDotColor: Colors.white,
+                              dotColor: Colors.white54,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  else
+                    Container(
+                      // height: 200,
+                      color: Colors.grey[200],
+                      // child: const Center(child: Text('No media available')),
+                    ),
+
+                  // 📝 CONTENT SECTION
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      post.content!,
+                      post.content,
                       style: const TextStyle(fontSize: 14, height: 1.4),
                     ),
                   ),
+
+                  // 👤 FOOTER
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(padding: const EdgeInsets.all(8.0),
-                      child: Text(timeAgo(post.createdAt!)),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          timeAgo(post.createdAt ?? DateTime.now()),
+                          style: const TextStyle(color: Colors.grey),
+                        ),
                       ),
-                      Padding(padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Posted by: ${post.author ?? "Unknown"}',
-                        style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
-                      ),),
-
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Posted by: ${post.author ?? "Unknown"}',
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

@@ -41,38 +41,44 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final matchDayAsync = ref.watch(matchDayListProvider);
     
     return Scaffold(
-      body: postAsync.when(
-        data: (posts) => SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const StoryScroller(),
-              CardScroller(
-                matchDays: matchDayAsync.when(
-                  data: (matchDays) => matchDays,
-                  loading: () => const [],
-                  error: (_, __) => const [],
+      body: RefreshIndicator(
+        onRefresh: () async{
+          await ref.read(postListProvider.notifier).fetchPosts();
+          await ref.read(matchDayListProvider.notifier).fetchMatchDays();
+        },
+        child: postAsync.when(
+          data: (posts) => SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const StoryScroller(),
+                CardScroller(
+                  matchDays: matchDayAsync.when(
+                    data: (matchDays) => matchDays,
+                    loading: () => const [],
+                    error: (_, __) => const [],
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 18),
-                padding: const EdgeInsets.all(8),
-                child: const Text(
-                  "What's New",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Container(
+                  margin: const EdgeInsets.only(top: 18),
+                  padding: const EdgeInsets.all(8),
+                  child: const Text(
+                    "What's New",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              PostContainer(posts: posts), // ✅ now passing List<PostModel>
-              const SizedBox(height: 60),
-            ],
+                PostContainer(posts: posts), // ✅ now passing List<PostModel>
+                const SizedBox(height: 60),
+              ],
+            ),
           ),
-        ),
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
-        ),
-        error: (err, _) => Center(
-          child: Text('Somthing went wrong or please trun on your internet'),
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+          error: (err, _) => Center(
+            child: Text("${err}"),
+          ),
         ),
       ),
     );

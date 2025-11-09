@@ -71,10 +71,20 @@ class _LiveCommenetatorState extends ConsumerState<LiveCommenetator> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(homeTeam, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Column(
+                    children: [
+                      Text(homeTeam, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      Text('2'),
+                    ],
+                  ),
                   const Text('vs'),
-                  Text(awayTeam, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                ],
+                  Column(
+                    children: [
+                      Text(awayTeam, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      Text('1')
+                    ],
+                  ),
+                ],              
               ),
               const SizedBox(height: 10),
 
