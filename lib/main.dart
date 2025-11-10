@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sanjaw/core/config/app_theme.dart';
+import 'package:sanjaw/features/home/presentation/widgets/story_view.dart';
 import 'package:sanjaw/features/main/presentation/main_screen.dart';
 import 'package:sanjaw/features/players/presentation/screens/players_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -98,6 +99,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       routes: {
         PlayersScreen.routeName: (context) => const PlayersScreen(),
+        // StoryViewPage.routeName: (context)=> const StoryViewPage(story_urls: story_urls)
       },
       home: const MainScreen(),
       debugShowCheckedModeBanner: false,

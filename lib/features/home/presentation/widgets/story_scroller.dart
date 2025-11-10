@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sanjaw/core/config/app_colors.dart';
+import 'package:sanjaw/features/home/presentation/widgets/story_view.dart';
 
 class StoryScroller extends StatelessWidget {
   const StoryScroller({super.key});
@@ -21,45 +22,54 @@ class StoryScroller extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: 6,
             itemBuilder: (context, index) {
-              return Container(
-                width: 130,
-                margin: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
-                decoration: BoxDecoration(
-                 color: AppColors.grayColor,
-                 borderRadius: BorderRadius.circular(8),
-                 image: DecorationImage(
-                  image: NetworkImage('https://picsum.photos/200/300',scale: 0.5),
-                  fit: BoxFit.cover,
-                ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.transparent,
-                            Colors.black54,
-                            Colors.black87,   
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+              return GestureDetector(
+                onTap: (){
+                  print('story');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => StoryViewPage(story_urls: [
+                    'https://picsum.photos/200/300',
+                    'https://picsum.photos/200/300',
+                  ]),));
+                },
+                child: Container(
+                  width: 130,
+                  margin: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  decoration: BoxDecoration(
+                   color: AppColors.grayColor,
+                   borderRadius: BorderRadius.circular(8),
+                   image: DecorationImage(
+                    image: NetworkImage('https://picsum.photos/200/300',scale: 0.5),
+                    fit: BoxFit.cover,
+                  ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.transparent,
+                              Colors.black54,
+                              Colors.black87,   
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8),
+                          ),
                         ),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8),
+                        child: Text(
+                          'Adane Girma ${index + 1}',
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      child: Text(
-                        'Adane Girma ${index + 1}',
-                        style: TextStyle(color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
