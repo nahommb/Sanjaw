@@ -22,12 +22,12 @@ class StoryScroller extends StatelessWidget {
           child: Text('Good Morning',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
         ),
         Container(
-          height: 200,
+           height: story.length > 0 ? 200:10,
           // padding: EdgeInsets.only(top: 10,left: 20),
           margin: EdgeInsets.only(bottom: 12),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 6,
+            itemCount: story.length,
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: (){

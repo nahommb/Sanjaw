@@ -75,7 +75,7 @@ class _LiveCommenetatorState extends ConsumerState<LiveCommenetator> {
                     children: [
                       Text(homeTeam, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                        liveEventsAsync.when(
-                        data: (data) => Text(data['home']?[0]['home_score']),
+                        data: (data) => Text('${data['home']?[0]['home_score']}'),
                         error: (_,_)=>Text(''),
                         loading: ()=>Text('')
                         )
@@ -86,7 +86,7 @@ class _LiveCommenetatorState extends ConsumerState<LiveCommenetator> {
                     children: [
                       Text(awayTeam, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                        liveEventsAsync.when(
-                        data: (data) => Text(data['away']?[0]['away_score']),
+                        data: (data) => Text('${data['away']?[0]['away_score']}'),
                         error: (_,_)=>Text(''),
                         loading: ()=>Text('')
                         )
