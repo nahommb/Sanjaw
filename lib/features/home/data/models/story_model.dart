@@ -18,8 +18,8 @@ factory StoryModel.fromJson(Map<String,dynamic> json){
 
       List<String> parseStoryUrls = [];
 
-      if(json['story_urls'] != null){
-          final raw = json['story_urls'];
+      if(json['media_urls'] != null){
+          final raw = json['media_urls'];
         try{
           if(raw is String && raw.isNotEmpty){
 

@@ -16,7 +16,20 @@ final storyListProvider = StateNotifierProvider<StoryNotifier,AsyncValue<List<St
 
 
 class StoryNotifier extends StateNotifier<AsyncValue<List<StoryModel>>>{
+   final StoryRepository repository;
 
-  StoryNotifier(StoryRepository repository):super(AsyncValue.loading());
+  StoryNotifier(this.repository):super(AsyncValue.loading());
+
+  Future<void> fetchStory() async{
+   try{
+    final story = await repository.fetchStory();
+
+    state = AsyncData([...story]);
+   }
+   catch(err){
+      print(err);
+   }
+    
+  }
 
 }

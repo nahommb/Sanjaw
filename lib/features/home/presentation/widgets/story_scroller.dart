@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:sanjaw/core/config/app_colors.dart';
+import 'package:sanjaw/features/home/data/models/story_model.dart';
 import 'package:sanjaw/features/home/presentation/widgets/story_view.dart';
 
 class StoryScroller extends StatelessWidget {
-  const StoryScroller({super.key});
 
+
+  final List<StoryModel> story;
+  const StoryScroller({super.key,required this.story});
+
+  
   @override
   Widget build(BuildContext context) {
+
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,10 +32,7 @@ class StoryScroller extends StatelessWidget {
               return GestureDetector(
                 onTap: (){
                   print('story');
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StoryViewPage(story_urls: [
-                    'https://picsum.photos/200/300',
-                    'https://picsum.photos/200/300',
-                  ]),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => StoryViewPage(story_urls:story[index].storyUrls),));
                 },
                 child: Container(
                   width: 130,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sanjaw/features/home/presentation/provider/match_day_provider.dart';
 import 'package:sanjaw/features/home/presentation/provider/post_provider.dart';
+import 'package:sanjaw/features/home/presentation/provider/story_provider.dart';
 import 'package:sanjaw/features/home/presentation/widgets/card_scroller.dart';
 import 'package:sanjaw/features/home/presentation/widgets/story_scroller.dart';
 import 'package:sanjaw/features/home/presentation/widgets/post_container.dart';
@@ -39,6 +40,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final postAsync = ref.watch(postListProvider);
     final matchDayAsync = ref.watch(matchDayListProvider);
+    final storyAsync = ref.watch(storyListProvider);
     
     return Scaffold(
       body: RefreshIndicator(
@@ -52,7 +54,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const StoryScroller(),
+                StoryScroller(story: storyAsync.when(data: (story)=>story, error: (_,_)=>const [], loading: ()=> const[]),),
                 CardScroller(
                   matchDays: matchDayAsync.when(
                     data: (matchDays) => matchDays,
