@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sanjaw/core/config/app_colors.dart';
+import 'package:sanjaw/core/helper/video_checker.dart';
 import 'package:sanjaw/features/home/data/models/story_model.dart';
 import 'package:sanjaw/features/home/presentation/widgets/story_view.dart';
 
@@ -9,6 +10,18 @@ class StoryScroller extends StatelessWidget {
   final List<StoryModel> story;
   const StoryScroller({super.key,required this.story});
 
+ int decorationImageIndex(urls){
+  int index = -1;
+  for(int i= urls.length-1 ;i >= 0; i--){
+    if(VideoChecker(urls[i])== 'image'){
+      index = i;
+    }
+    else{
+      index = -1;
+    }
+  }
+  return index;
+ }
   
   @override
   Widget build(BuildContext context) {
@@ -39,11 +52,11 @@ class StoryScroller extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
                   decoration: BoxDecoration(
                    color: AppColors.grayColor,
-                   borderRadius: BorderRadius.circular(8),
-                   image: DecorationImage(
-                    image: NetworkImage('https://picsum.photos/200/300',scale: 0.5),
+                   borderRadius: BorderRadius.circular(8),                   
+                   image:  decorationImageIndex(story[index].storyUrls)>=0 ? DecorationImage(
+                    image: NetworkImage(story[index].storyUrls[decorationImageIndex(story[index].storyUrls)],scale: 0.5),
                     fit: BoxFit.cover,
-                  ),
+                  ):null,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
