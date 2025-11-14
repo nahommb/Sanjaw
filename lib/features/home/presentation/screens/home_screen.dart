@@ -20,6 +20,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // ref.read(storyListProvider.notifier).fetchStory();
     // ref.read(postListProvider.notifier).fetchPosts(); // first fetch
 
     _scrollController.addListener(() {

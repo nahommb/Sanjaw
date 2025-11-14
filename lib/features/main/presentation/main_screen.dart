@@ -5,6 +5,7 @@ import 'package:sanjaw/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sanjaw/features/live/presentation/screens/live_screen.dart';
 import 'package:sanjaw/features/players/presentation/screens/players_screen.dart';
+import 'package:sanjaw/features/review/presentation/review_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -51,6 +52,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> pages = [
     HomeScreen(),
     LiveScreen(),
+    ReviewScreen(),
   ];
 
   @override
@@ -96,8 +98,8 @@ class _MainScreenState extends State<MainScreen> {
         
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person,color: AppColors.secondaryColor),
-          label: 'Profile',
+          icon: Icon(Icons.restore_outlined,color: AppColors.secondaryColor),
+          label: 'Review',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings,color: AppColors.secondaryColor), 

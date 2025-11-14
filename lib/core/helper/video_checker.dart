@@ -6,7 +6,7 @@ String VideoChecker(String url) {
   return 'video';
  }
  else{
-  if(url.startsWith('http')){
+  if(!url.startsWith('http')){
     return 'text';
   }
   else{

@@ -32,7 +32,7 @@ class PostNotifier extends StateNotifier<AsyncValue<List<PostModel>>> {
       _page++;
      
        if (updatedPosts.isNotEmpty) {
-        print("Media URLs for first post: ${updatedPosts.first.mediaUrls}");
+      //  print("Media URLs for first post: ${updatedPosts.first.mediaUrls}");
       }
 
     } catch (e, st) {

@@ -20,6 +20,7 @@ class StoryScroller extends StatelessWidget {
       index = -1;
     }
   }
+  print('index ${index}');
   return index;
  }
   
@@ -35,13 +36,14 @@ class StoryScroller extends StatelessWidget {
           child: Text('Good Morning',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
         ),
         Container(
-           height: story.length > 0 ? 200:10,
+           height: story.isNotEmpty ? 200:10,
           // padding: EdgeInsets.only(top: 10,left: 20),
           margin: EdgeInsets.only(bottom: 12),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: story.length,
             itemBuilder: (context, index) {
+              int imageIndex =  decorationImageIndex(story[index].storyUrls);
               return GestureDetector(
                 onTap: (){
                   print('story');
@@ -52,9 +54,13 @@ class StoryScroller extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
                   decoration: BoxDecoration(
                    color: AppColors.grayColor,
-                   borderRadius: BorderRadius.circular(8),                   
-                   image:  decorationImageIndex(story[index].storyUrls)>=0 ? DecorationImage(
-                    image: NetworkImage(story[index].storyUrls[decorationImageIndex(story[index].storyUrls)],scale: 0.5),
+                   borderRadius: BorderRadius.circular(8),
+                   border: Border.all(
+                    color: AppColors.secondaryColor,
+                    width: 2
+                   ),                   
+                   image:  imageIndex >=0 ? DecorationImage(
+                    image: NetworkImage(story[index].storyUrls[imageIndex],scale: 0.5),
                     fit: BoxFit.cover,
                   ):null,
                   ),
@@ -80,7 +86,7 @@ class StoryScroller extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          'Adane Girma ${index + 1}',
+                          '${story[index].title}',
                           style: TextStyle(color: Colors.white),
                           textAlign: TextAlign.center,
                         ),

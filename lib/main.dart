@@ -99,6 +99,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       routes: {
         PlayersScreen.routeName: (context) => const PlayersScreen(),
+        
         // StoryViewPage.routeName: (context)=> const StoryViewPage(story_urls: story_urls)
       },
       home: const MainScreen(),
