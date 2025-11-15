@@ -3,16 +3,16 @@ class Previousmatchesmodel {
 
   final String homeTeam;
   final String awayTeam;
-  final String homeScore;
-  final String awayScore;
-  final String matchType;
+  final int homeScore;
+  final int awayScore;
+  final String? matchType;
 
  Previousmatchesmodel({
   required this.homeTeam,
   required this.awayTeam,
   required this.homeScore,
   required this.awayScore,
-  required this.matchType,
+  this.matchType,
  });
 
  factory Previousmatchesmodel.fromJson(Map<String,dynamic> json){
@@ -20,13 +20,13 @@ class Previousmatchesmodel {
   return Previousmatchesmodel(
       homeTeam: json['home_team'] as String,
       awayTeam: json['away_team'] as String,
-      homeScore: json['home_score'] as String,
-      awayScore: json['away_score'] as String,
-      matchType: json['match_type'] as String
+      homeScore: json['home_score'] as int,
+      awayScore: json['away_score'] as int,
+      matchType: json['match_type'] as String?
   );
  }
 
- Map<String,dynamic> toJson(){
+ Map<dynamic,dynamic> toJson(){
 
   return{
     homeTeam:homeTeam,

@@ -22,15 +22,15 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
     
     return Scaffold(
       body: asyncData.when(data: (data){
-     
-      ListView.builder(
+      // print(data[0].homeTeam);
+      return ListView.builder(
         itemCount: data.length,
         itemBuilder: (context,index){
         return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 10,),
-            Text(data[index].matchType,style: TextStyle(fontWeight: FontWeight.bold),),
+            Text(data[index].matchType ?? '',style: TextStyle(fontWeight: FontWeight.bold),),
             Container(
               padding: EdgeInsets.symmetric(vertical: 20,),
               margin: EdgeInsets.symmetric(horizontal: 10),
@@ -50,9 +50,9 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(data[index].homeTeam,style: TextStyle(fontWeight: FontWeight.bold),),
-                  Text(data[index].homeScore),
+                  Text('${data[index].homeScore}'),
                   Text('vs'),
-                  Text(data[index].awayScore),
+                  Text('${data[index].awayScore}'),
                   Text(data[index].awayTeam,style: TextStyle(fontWeight: FontWeight.bold),),
                   
                 ],
