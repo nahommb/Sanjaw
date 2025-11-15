@@ -5,7 +5,7 @@ import 'package:sanjaw/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sanjaw/features/live/presentation/screens/live_screen.dart';
 import 'package:sanjaw/features/players/presentation/screens/players_screen.dart';
-import 'package:sanjaw/features/review/presentation/review_screen.dart';
+import 'package:sanjaw/features/review/presentation/screens/review_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

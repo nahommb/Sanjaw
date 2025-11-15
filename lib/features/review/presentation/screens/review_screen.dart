@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sanjaw/core/config/app_colors.dart';
+import 'package:sanjaw/features/review/presentation/provider/previous_mathes_provider.dart';
 
-class ReviewScreen extends StatelessWidget {
+class ReviewScreen extends ConsumerStatefulWidget {
 
   // static String routeName = 'review_screen';
 
   const ReviewScreen({super.key});
 
   @override
+  ConsumerState<ReviewScreen> createState() => _ReviewScreenState();
+}
+
+class _ReviewScreenState extends ConsumerState<ReviewScreen> {
+
+  @override
   Widget build(BuildContext context) {
+
+    final asyncData = ref.watch(previousMachesListProvider);
+    
     return Scaffold(
-      body: ListView.builder(
-        itemCount: 15,
+      body: asyncData.when(data: (data){
+     
+      ListView.builder(
+        itemCount: data.length,
         itemBuilder: (context,index){
-      
         return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 10,),
-            Text('Ethiopian Cup',style: TextStyle(fontWeight: FontWeight.bold),),
+            Text(data[index].matchType,style: TextStyle(fontWeight: FontWeight.bold),),
             Container(
               padding: EdgeInsets.symmetric(vertical: 20,),
               margin: EdgeInsets.symmetric(horizontal: 10),
@@ -37,11 +49,11 @@ class ReviewScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Ethiopian Coffee',style: TextStyle(fontWeight: FontWeight.bold),),
-                  Text('2'),
+                  Text(data[index].homeTeam,style: TextStyle(fontWeight: FontWeight.bold),),
+                  Text(data[index].homeScore),
                   Text('vs'),
-                  Text('2'),
-                  Text('St George',style: TextStyle(fontWeight: FontWeight.bold),),
+                  Text(data[index].awayScore),
+                  Text(data[index].awayTeam,style: TextStyle(fontWeight: FontWeight.bold),),
                   
                 ],
               ),
@@ -58,7 +70,12 @@ class ReviewScreen extends StatelessWidget {
             // ),
           ],
         );
-      }),
+      });
+      }, 
+      error: (_,_) => Text(''), 
+      loading: ()=> Center(child: CircularProgressIndicator(),)
+      ) 
+ ,
       
     );
   }

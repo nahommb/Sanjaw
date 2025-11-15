@@ -48,6 +48,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         onRefresh: () async{
           await ref.read(postListProvider.notifier).fetchPosts();
           await ref.read(matchDayListProvider.notifier).fetchMatchDays();
+          await ref.read(storyListProvider.notifier).fetchStory();
         },
         child: postAsync.when(
           data: (posts) => SingleChildScrollView(
