@@ -42,7 +42,7 @@ class _PostContainerState extends State<PostContainer> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                // color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(

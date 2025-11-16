@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sanjaw/core/config/app_colors.dart';
 
 class AppTheme {
 
@@ -15,6 +16,17 @@ class AppTheme {
       backgroundColor: Color(0xFFf5e108),
       foregroundColor: Color(0xFFc9232f),
       elevation: 0,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedIconTheme: IconThemeData(
+        color: AppColors.secondaryColor,
+      ),
+      unselectedIconTheme: IconThemeData(
+        color: Colors.black, 
+      ),
+      selectedItemColor: AppColors.primaryColor,
+      unselectedItemColor: Colors.black
     ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
@@ -39,6 +51,18 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.black,
       foregroundColor: Colors.amber,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.black,
+      
+      selectedIconTheme: IconThemeData(
+        color: AppColors.primaryColor
+      ),
+      unselectedIconTheme: IconThemeData(
+        color: AppColors.secondaryColor
+      ),
+      selectedItemColor: AppColors.primaryColor,
+      unselectedItemColor: AppColors.secondaryColor
     ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(fontSize: 16, color: Colors.white),

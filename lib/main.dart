@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sanjaw/core/config/app_theme.dart';
 import 'package:sanjaw/features/home/presentation/widgets/story_view.dart';
-import 'package:sanjaw/features/main/presentation/main_screen.dart';
+import 'package:sanjaw/features/main/presentation/provider/nightmood_provider.dart';
+import 'package:sanjaw/features/main/presentation/screens/main_screen.dart';
 import 'package:sanjaw/features/players/presentation/screens/players_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -88,14 +89,22 @@ Future<void> main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
   Widget build(BuildContext context) {
+    
+    final isNight = ref.watch(nightmoodProvider);
+
     return MaterialApp(
       title: 'Sanjaw',
-      theme: AppTheme.lightTheme,
+      theme: isNight?AppTheme.darkTheme:AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       routes: {
         PlayersScreen.routeName: (context) => const PlayersScreen(),
