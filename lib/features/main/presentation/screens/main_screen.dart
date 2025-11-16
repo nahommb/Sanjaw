@@ -99,7 +99,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             width: 24,
             height: 24,
             colorFilter: ColorFilter.mode(
-              isNight?AppColors.primaryColor:currentIndex == 0?AppColors.secondaryColor:Colors.black
+              isNight?currentIndex == 0?AppColors.primaryColor:AppColors.secondaryColor:currentIndex == 0?AppColors.secondaryColor:Colors.black
              ,BlendMode.srcIn,),
             // color: isNight?AppColors.secondaryColor:Colors.black,
             
