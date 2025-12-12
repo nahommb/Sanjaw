@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sanjaw/core/config/app_theme.dart';
-import 'package:sanjaw/features/home/presentation/widgets/story_view.dart';
 import 'package:sanjaw/features/main/presentation/provider/nightmood_provider.dart';
 import 'package:sanjaw/features/main/presentation/screens/main_screen.dart';
 import 'package:sanjaw/features/players/presentation/screens/players_screen.dart';
@@ -68,11 +67,17 @@ Future<void> main() async {
   await messaging.requestPermission();
 
   // 🎯 Subscribe to topic (all users get this)
-  await messaging.subscribeToTopic('live_updates');
-  print("✅ Subscribed to topic: live_updates");
+  try{
+    messaging.subscribeToTopic('live_updates');
+
+  }
+  catch(err){
+    print(err);
+  }
+ 
 
   // 🔥 Print FCM token (for debugging)
-  final token = await messaging.getToken();
+  final token =  messaging.getToken();
   print("📱 FCM Token: $token");
 
   // ⚡ Listen for foreground messages
@@ -106,6 +111,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       title: 'Sanjaw',
       theme: isNight?AppTheme.darkTheme:AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+      
       routes: {
         PlayersScreen.routeName: (context) => const PlayersScreen(),
         
